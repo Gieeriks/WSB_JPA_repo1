@@ -7,12 +7,13 @@ public class VisitTO {
     private String description;
     private LocalDateTime time;
     private Long doctorId;
-    private String doctorName; // Dodane pole
     private Long patientId;
-    private String patientName; // Dodane pole
     private Long medicalTreatmentId;
+    private String doctorName;
+    private String patientName;
 
     // Gettery i settery
+
     public Long getId() {
         return id;
     }
@@ -45,14 +46,6 @@ public class VisitTO {
         this.doctorId = doctorId;
     }
 
-    public String getDoctorName() {
-        return doctorName;
-    }
-
-    public void setDoctorName(String doctorName) {
-        this.doctorName = doctorName;
-    }
-
     public Long getPatientId() {
         return patientId;
     }
@@ -61,19 +54,27 @@ public class VisitTO {
         this.patientId = patientId;
     }
 
-    public String getPatientName() {
-        return patientName;
-    }
-
-    public void setPatientName(String patientName) {
-        this.patientName = patientName;
-    }
-
     public Long getMedicalTreatmentId() {
         return medicalTreatmentId;
     }
 
     public void setMedicalTreatmentId(Long medicalTreatmentId) {
         this.medicalTreatmentId = medicalTreatmentId;
+    }
+
+    public String getDoctorName() {
+        return doctorName;
+    }
+
+    public void setDoctorName(String doctorName) {
+        this.doctorName = doctorName;
+    }
+
+    public String getPatientName() {
+        return patientName;
+    }
+
+    public void setPatientName(String patientName) {
+        this.patientName = patientName;
     }
 }

@@ -1,3 +1,11 @@
+-- Usuwanie tabel, jeśli istnieją
+DROP TABLE IF EXISTS visit CASCADE;
+DROP TABLE IF EXISTS patient CASCADE;
+DROP TABLE IF EXISTS doctor CASCADE;
+DROP TABLE IF EXISTS address CASCADE;
+DROP TABLE IF EXISTS medical_treatment CASCADE;
+
+-- Tworzenie tabel
 CREATE TABLE address (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     address_line1 VARCHAR(255),
@@ -49,55 +57,40 @@ CREATE TABLE visit (
     FOREIGN KEY (medical_treatment_id) REFERENCES medical_treatment(id)
 );
 
--- Wstawianie danych do tabeli Address
+-- Wstawianie danych do tabeli address
 insert into address (id, address_line1, address_line2, city, postal_code)
 values (1, 'xx', 'yy', 'city', '62-030');
 
 insert into address (id, address_line1, address_line2, city, postal_code)
 values (2, 'aa', 'bb', 'another_city', '72-050');
 
--- Wstawianie danych do tabeli Doctor
+-- Wstawianie danych do tabeli doctor
 insert into doctor (id, first_name, last_name, telephone_number, email, doctor_number, specialization, address_id)
 values (1, 'John', 'Doe', '123456789', 'john.doe@example.com', 'DOC001', 'CARDIOLOGY', 1);
 
 insert into doctor (id, first_name, last_name, telephone_number, email, doctor_number, specialization, address_id)
 values (2, 'Jane', 'Smith', '987654321', 'jane.smith@example.com', 'DOC002', 'DERMATOLOGY', 2);
 
--- Wstawianie danych do tabeli Patient
+-- Wstawianie danych do tabeli patient
 insert into patient (id, first_name, last_name, telephone_number, email, patient_number, date_of_birth, active, address_id)
-values (1, 'Alice', 'Johnson', '555666777', 'alice.johnson@example.com', 'PAT001', '1990-01-01', true, 1);
+values (1, 'Alice', 'Johnson', '555666777', 'alice.johnson@example.com', 'PAT001', '1990-01-01', TRUE, 1);
 
 insert into patient (id, first_name, last_name, telephone_number, email, patient_number, date_of_birth, active, address_id)
-values (2, 'Bob', 'Brown', '444555666', 'bob.brown@example.com', 'PAT002', '1985-05-05', true, 2);
+values (2, 'Bob', 'Brown', '444555666', 'bob.brown@example.com', 'PAT002', '1985-05-05', TRUE, 2);
 
-insert into patient (id, first_name, last_name, telephone_number, email, patient_number, date_of_birth, active, address_id)
-values (3, 'Charlie', 'Green', '333444555', 'charlie.green@example.com', 'PAT003', '1978-07-07', true, 1);
-
-insert into patient (id, first_name, last_name, telephone_number, email, patient_number, date_of_birth, active, address_id)
-values (4, 'Diana', 'Blue', '222333444', 'diana.blue@example.com', 'PAT004', '1992-08-08', true, 2);
-
--- Wstawianie danych do tabeli MedicalTreatment
+-- Wstawianie danych do tabeli medical_treatment
 insert into medical_treatment (id, description, type)
 values (1, 'Physical Therapy', 'PHYSIOTHERAPY');
 
 insert into medical_treatment (id, description, type)
 values (2, 'Chemotherapy', 'CHEMOTHERAPY');
 
--- Wstawianie danych do tabeli Visit
+-- Wstawianie danych do tabeli visit
 insert into visit (id, description, time, doctor_id, patient_id, medical_treatment_id)
-values (1, 'Initial consultation', '2024-05-01 10:00:00', 1, 1, 1);
+values (1, 'Initial consultation', '2024-05-01T10:00:00', 1, 1, 1);
 
 insert into visit (id, description, time, doctor_id, patient_id, medical_treatment_id)
-values (2, 'Follow-up visit', '2024-05-08 14:00:00', 2, 2, 2);
+values (2, 'Follow-up visit', '2024-05-08T14:00:00', 2, 2, 2);
 
 insert into visit (id, description, time, doctor_id, patient_id, medical_treatment_id)
-values (3, 'Consultation', '2024-05-10 11:00:00', 1, 1, 2);
-
-insert into visit (id, description, time, doctor_id, patient_id, medical_treatment_id)
-values (4, 'Routine check-up', '2024-05-15 09:00:00', 2, 3, 1);
-
-insert into visit (id, description, time, doctor_id, patient_id, medical_treatment_id)
-values (5, 'Therapy session', '2024-05-20 16:00:00', 1, 4, 1);
-
-insert into visit (id, description, time, doctor_id, patient_id, medical_treatment_id)
-values (6, 'Follow-up visit', '2024-05-25 12:00:00', 2, 4, 2);
+values (3, 'Physical Therapy Session', '2024-06-01T10:00:00', 1, 1, 1);

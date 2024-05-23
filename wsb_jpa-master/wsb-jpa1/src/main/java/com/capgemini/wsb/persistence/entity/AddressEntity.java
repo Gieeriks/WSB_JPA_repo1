@@ -1,9 +1,10 @@
 package com.capgemini.wsb.persistence.entity;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Entity
+@Table(name = "address")
 public class AddressEntity {
 
 	@Id
@@ -15,10 +16,14 @@ public class AddressEntity {
 	private String city;
 	private String postalCode;
 
-	@OneToMany(mappedBy = "address")
-	private List<PatientEntity> patients;
+	@OneToMany(mappedBy = "address", cascade = CascadeType.ALL, orphanRemoval = true)
+	private Set<DoctorEntity> doctors;
+
+	@OneToMany(mappedBy = "address", cascade = CascadeType.ALL, orphanRemoval = true)
+	private Set<PatientEntity> patients;
 
 	// Gettery i settery
+
 	public Long getId() {
 		return id;
 	}
@@ -59,11 +64,19 @@ public class AddressEntity {
 		this.postalCode = postalCode;
 	}
 
-	public List<PatientEntity> getPatients() {
+	public Set<DoctorEntity> getDoctors() {
+		return doctors;
+	}
+
+	public void setDoctors(Set<DoctorEntity> doctors) {
+		this.doctors = doctors;
+	}
+
+	public Set<PatientEntity> getPatients() {
 		return patients;
 	}
 
-	public void setPatients(List<PatientEntity> patients) {
+	public void setPatients(Set<PatientEntity> patients) {
 		this.patients = patients;
 	}
 }

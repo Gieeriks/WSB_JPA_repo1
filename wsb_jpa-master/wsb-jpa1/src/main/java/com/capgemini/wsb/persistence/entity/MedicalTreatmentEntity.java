@@ -5,16 +5,18 @@ import com.capgemini.wsb.persistence.enums.TreatmentType;
 import javax.persistence.*;
 
 @Entity
-
+@Table(name = "medical_treatment")
 public class MedicalTreatmentEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@Column(nullable = false)
 	private String description;
 
 	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
 	private TreatmentType type;
 
 	// Gettery i settery

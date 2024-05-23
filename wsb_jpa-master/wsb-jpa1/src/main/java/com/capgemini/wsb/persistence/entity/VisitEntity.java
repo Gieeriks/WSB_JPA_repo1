@@ -4,26 +4,30 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "visit")
 public class VisitEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@Column(nullable = false)
 	private String description;
+
+	@Column(nullable = false)
 	private LocalDateTime time;
 
 	@ManyToOne
-	@JoinColumn(name = "doctor_id")
+	@JoinColumn(name = "doctor_id", nullable = false)
 	private DoctorEntity doctor;
 
 	@ManyToOne
-	@JoinColumn(name = "medical_treatment_id")
-	private MedicalTreatmentEntity medicalTreatment;
+	@JoinColumn(name = "patient_id", nullable = false)
+	private PatientEntity patient;
 
 	@ManyToOne
-	@JoinColumn(name = "patient_id")
-	private PatientEntity patient;
+	@JoinColumn(name = "medical_treatment_id", nullable = false)
+	private MedicalTreatmentEntity medicalTreatment;
 
 	// Gettery i settery
 

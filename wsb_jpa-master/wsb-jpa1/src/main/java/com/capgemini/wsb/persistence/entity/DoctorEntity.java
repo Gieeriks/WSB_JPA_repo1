@@ -2,18 +2,11 @@ package com.capgemini.wsb.persistence.entity;
 
 import com.capgemini.wsb.persistence.enums.Specialization;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
+@Table(name = "doctor")
 public class DoctorEntity {
 
 	@Id
@@ -38,12 +31,10 @@ public class DoctorEntity {
 	@Enumerated(EnumType.STRING)
 	private Specialization specialization;
 
-	// Relacja jednostronna z Address
 	@ManyToOne
 	@JoinColumn(name = "address_id", nullable = false)
 	private AddressEntity address;
 
-	// Relacja dwustronna z Visit
 	@OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<VisitEntity> visits;
 

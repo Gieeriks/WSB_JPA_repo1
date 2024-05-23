@@ -22,6 +22,6 @@ public class VisitServiceTest {
         Long patientId = 1L; // Zakładając, że mamy pacjenta o ID 1 w data.sql
         List<VisitTO> visits = visitService.findAllByPatientId(patientId);
         assertNotNull(visits);
-        assertEquals(1, visits.size()); // Zakładając, że mamy jedną wizytę dla pacjenta o ID 1 w data.sql
+        assertEquals(2, visits.size()); // Zakładając, że mamy dwie wizyty dla pacjenta o ID 1 w data.sql
     }
 }

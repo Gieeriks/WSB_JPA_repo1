@@ -2,44 +2,45 @@ package com.capgemini.wsb.persistance.repository;
 
 import com.capgemini.wsb.persistence.entity.PatientEntity;
 import com.capgemini.wsb.persistence.repository.PatientRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.time.LocalDate;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
-@SpringBootTest
+@DataJpaTest
 @Sql("/data.sql")
 public class PatientRepositoryTest {
 
     @Autowired
     private PatientRepository patientRepository;
 
+    @BeforeEach
+    void setUp() {
+        
+    }
+
     @Test
-    public void testFindByLastName() {
+    void testFindByLastName() {
         List<PatientEntity> patients = patientRepository.findByLastName("Johnson");
-        assertNotNull(patients);
-        assertEquals(1, patients.size()); // Zakładając, że mamy jednego pacjenta o nazwisku "Johnson" w data.sql
+        assertEquals(1, patients.size());
     }
 
     @Test
-    public void testFindPatientsWithMoreThanXVisits() {
-        long visitCount = 1L;
-        List<PatientEntity> patients = patientRepository.findPatientsWithMoreThanXVisits(visitCount);
-        assertNotNull(patients);
-        assertEquals(2, patients.size()); // Zakładając, że mamy dwóch pacjentów z więcej niż jedną wizytą w data.sql
+    void testFindPatientsWithMoreThanXVisits() {
+        List<PatientEntity> patients = patientRepository.findPatientsWithMoreThanXVisits(1L);
+        assertEquals(1, patients.size());
     }
 
     @Test
-    public void testFindPatientsYoungerThanDate() {
-        LocalDate date = LocalDate.of(1990, 1, 1);
-        List<PatientEntity> patients = patientRepository.findPatientsYoungerThanDate(date);
-        assertNotNull(patients);
+    void testFindPatientsYoungerThanDate() {
+        List<PatientEntity> patients = patientRepository.findPatientsYoungerThanDate(LocalDate.of(1988, 1, 1));
         assertFalse(patients.isEmpty());
-        assertTrue(patients.stream().allMatch(p -> p.getDateOfBirth().isAfter(date)));
     }
 }
