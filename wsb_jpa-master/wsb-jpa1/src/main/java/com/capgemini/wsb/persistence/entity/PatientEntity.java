@@ -2,7 +2,6 @@ package com.capgemini.wsb.persistence.entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,21 +13,20 @@ public class PatientEntity {
 
 	private String firstName;
 	private String lastName;
+	private String telephoneNumber;
 	private String email;
 	private String patientNumber;
-	private String telephoneNumber;
 	private LocalDate dateOfBirth;
-	private boolean isActive;
+	private Boolean active;
 
 	@ManyToOne
 	@JoinColumn(name = "address_id")
 	private AddressEntity address;
 
 	@OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<VisitEntity> visits = new ArrayList<>(); // Inicjalizacja listy
+	private List<VisitEntity> visits;
 
 	// Gettery i settery
-
 	public Long getId() {
 		return id;
 	}
@@ -53,6 +51,14 @@ public class PatientEntity {
 		this.lastName = lastName;
 	}
 
+	public String getTelephoneNumber() {
+		return telephoneNumber;
+	}
+
+	public void setTelephoneNumber(String telephoneNumber) {
+		this.telephoneNumber = telephoneNumber;
+	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -69,14 +75,6 @@ public class PatientEntity {
 		this.patientNumber = patientNumber;
 	}
 
-	public String getTelephoneNumber() {
-		return telephoneNumber;
-	}
-
-	public void setTelephoneNumber(String telephoneNumber) {
-		this.telephoneNumber = telephoneNumber;
-	}
-
 	public LocalDate getDateOfBirth() {
 		return dateOfBirth;
 	}
@@ -85,12 +83,12 @@ public class PatientEntity {
 		this.dateOfBirth = dateOfBirth;
 	}
 
-	public boolean isActive() {
-		return isActive;
+	public Boolean getActive() {
+		return active;
 	}
 
-	public void setActive(boolean active) {
-		isActive = active;
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
 
 	public AddressEntity getAddress() {

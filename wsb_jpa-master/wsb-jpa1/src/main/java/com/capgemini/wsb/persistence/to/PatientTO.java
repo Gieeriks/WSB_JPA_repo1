@@ -12,11 +12,10 @@ public class PatientTO {
     private String email;
     private String patientNumber;
     private LocalDate dateOfBirth;
-    private boolean isActive;
+    private Boolean active; // Dodane pole
     private List<VisitTO> visits;
 
     // Gettery i settery
-
     public Long getId() {
         return id;
     }
@@ -73,12 +72,12 @@ public class PatientTO {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public boolean isActive() {
-        return isActive;
+    public Boolean getActive() {
+        return active;
     }
 
-    public void setActive(boolean isActive) {
-        this.isActive = isActive;
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     public List<VisitTO> getVisits() {

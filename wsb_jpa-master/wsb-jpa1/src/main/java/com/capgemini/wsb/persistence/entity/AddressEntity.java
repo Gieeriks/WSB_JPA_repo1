@@ -1,12 +1,7 @@
 package com.capgemini.wsb.persistence.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 public class AddressEntity {
@@ -20,30 +15,16 @@ public class AddressEntity {
 	private String city;
 	private String postalCode;
 
-	// Relacja dwustronna z Doctor
-	@OneToMany(mappedBy = "address", cascade = CascadeType.ALL, orphanRemoval = true)
-	private Set<DoctorEntity> doctors;
-
-	// Relacja dwustronna z Patient
-	@OneToMany(mappedBy = "address", cascade = CascadeType.ALL, orphanRemoval = true)
-	private Set<PatientEntity> patients;
+	@OneToMany(mappedBy = "address")
+	private List<PatientEntity> patients;
 
 	// Gettery i settery
-
 	public Long getId() {
 		return id;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
 	}
 
 	public String getAddressLine1() {
@@ -62,6 +43,14 @@ public class AddressEntity {
 		this.addressLine2 = addressLine2;
 	}
 
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
 	public String getPostalCode() {
 		return postalCode;
 	}
@@ -70,19 +59,11 @@ public class AddressEntity {
 		this.postalCode = postalCode;
 	}
 
-	public Set<DoctorEntity> getDoctors() {
-		return doctors;
-	}
-
-	public void setDoctors(Set<DoctorEntity> doctors) {
-		this.doctors = doctors;
-	}
-
-	public Set<PatientEntity> getPatients() {
+	public List<PatientEntity> getPatients() {
 		return patients;
 	}
 
-	public void setPatients(Set<PatientEntity> patients) {
+	public void setPatients(List<PatientEntity> patients) {
 		this.patients = patients;
 	}
 }
